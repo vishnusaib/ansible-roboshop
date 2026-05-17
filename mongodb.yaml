@@ -11,3 +11,20 @@
     ansible.builtin.dnf:
       name: mongodb-org
       state: present
+
+  - name: start and enable mongodb
+    ansible.buitlin.service:
+      name: mongodb
+      state: started
+      enabled: yes
+  
+  - name: allow remote connections
+    ansible.buitlin.replace:
+      path: /etc/mongod.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+
+  - name: restart mongodb
+    ansible.builtin.service:
+      name: mongod
+      state: restarted
