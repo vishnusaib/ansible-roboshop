@@ -17,3 +17,14 @@
       name: rabbitmq-server
       state: started
       enabled: yes
+
+  - name: User setup
+    community.rabbitmq.rabbitmq_user:
+      user: roboshop
+      password: RoboShop@1
+      permissions:
+      - vhosts: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+      state: present
