@@ -15,7 +15,7 @@
     ansible.builtin.service:
       name: nginx
       state: started
-      enable: yes
+      enabled: yes
 
   - name: remove html dir
     ansible.builtin.file:
@@ -25,7 +25,7 @@
   - name: create html dir
     ansible.builtin.file:
       path: /usr/share/nginx/html
-      state: present
+      state: directory
 
   - name: download frontend code
     ansible.builtin.get_url:
