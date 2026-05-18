@@ -16,7 +16,7 @@
   - name: create roboshop system user
     ansible.builtin.user:
       name: roboshop
-      shell: /sbin/nologin/
+      shell: /sbin/nologin
       system: true
       home: /app
 
@@ -48,11 +48,11 @@
       dest: /etc/systemd/system/user.service
 
   - name: systemctl daemon reload
-    ansible.builtin.systemd.serivce:
+    ansible.builtin.systemd_service:
       daemon_reload: true
   
   - name: Start and enable user service
-    ansible.builtin.serivce:
+    ansible.builtin.service:
       name: user
       state: started
       enabled: yes
