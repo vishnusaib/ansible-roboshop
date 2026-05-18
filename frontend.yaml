@@ -12,7 +12,7 @@
       state: present
       
   - name: start and enable nginx
-    ansible.builtin.serivce:
+    ansible.builtin.service:
       name: nginx
       state: started
       enable: yes
