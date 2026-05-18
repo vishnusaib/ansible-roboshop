@@ -16,7 +16,7 @@
   - name: create roboshop system user
     ansible.builtin.user:
       name: roboshop
-      shell: /sbin/nologin/
+      shell: /sbin/nologin
       system: true
       home: /app
 
@@ -48,16 +48,16 @@
       dest: /etc/systemd/system/catalogue.service
 
   - name: systemctl daemon reload
-    ansible.builtin.systemd_serivce:
+    ansible.builtin.systemd_service:
       daemon_reload: true
   
   - name: Start and enable catalogue service
-    ansible.builtin.serivce:
+    ansible.builtin.service:
       name: catalogue
       state: started
       enabled: yes
     
-  - name: Install mondodb repo
+  - name: Install mongodb repo
     ansible.builtin.copy:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
@@ -76,5 +76,5 @@
       msg: "{{ catalogue_output}}"
 
   - name: load master data
-    ansible.builtin.shell: mongosh --host mongodb.vishnuc8.shop > /app/db/master-data.js
-    when: catalogue.output.stdout | int < 0
+    ansible.builtin.shell: mongosh --host mongodb.vishnuv8.shop > /app/db/master-data.js
+    when: catalogue_output.stdout | int < 0
