@@ -1,0 +1,22 @@
+- name: Setup Rabbitmq server
+  hosts: rabbitmq
+  become: yes
+  tasks:
+  - name: Copy Rabbitmq repo
+    ansible.builtin.copy:
+      src: rabbitmq.repo
+      dest: /etc/yum.repos.d/rabbitmq.repo
+
+  - name: Install Rabbitmq server
+    ansible.builtin.dnf:
+      name: rabbitmq-server
+      state: present
+  
+  - name: enable and start rabbitmq service
+    ansible.builtin.service:
+      name: rabbitmq-server
+      state: started
+      enabled: yes
+  
+  - name: setup root passwd
+    ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
