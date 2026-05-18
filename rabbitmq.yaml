@@ -17,6 +17,3 @@
       name: rabbitmq-server
       state: started
       enabled: yes
-  
-  - name: setup root passwd
-    ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
